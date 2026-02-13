@@ -1,25 +1,44 @@
-// import Link from "next/link";
-// import { Button } from "@/components/ui/button";
+"use client";
 
-// export default function Home() {
-//   return (
-//     <div className="flex flex-col items-center justify-center min-h-screen p-8 gap-8 font-[family-name:var(--font-geist-sans)]">
-//       <h1 className="text-4xl font-bold">Welcome to e-अतिथि</h1>
-//       <div className="flex gap-4">
-//         <Button asChild>
-//             <Link href="/dashboard">Go to Dashboard</Link>
-//         </Button>
-//       </div>
-//     </div>
-//   );
-// }
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import axiosInstance from "@/lib/axios";
 
 export default function Home() {
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setLoading(true);
+      setError("");
+  
+      try {
+        const res = await axiosInstance.post("/auth/login", { email, password });
+  
+        const data = res.data;
+  
+        // Store access token
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("user", JSON.stringify(data.user));
+  
+        // Redirect to dashboard
+        router.push("/dashboard");
+      } catch (err: any) {
+        setError(err.message || "Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
       <Card className="w-full max-w-md shadow-2xl border-0">
@@ -32,6 +51,12 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+        {error && (
+          <div className="rounded-md bg-red-50 p-4 text-sm text-red-700">
+            {error}
+          </div>
+        )}
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email" className="text-sm font-medium">
               Email
@@ -41,6 +66,9 @@ export default function Home() {
               type="email"
               placeholder="Enter your email"
               className="h-11"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="space-y-2">
@@ -48,29 +76,33 @@ export default function Home() {
               <Label htmlFor="password" className="text-sm font-medium">
                 Password
               </Label>
-              <Link
+              {/* <Link
                 href="/forgot-password"
                 className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
               >
                 Forgot password?
-              </Link>
+              </Link> */}
             </div>
             <Input
               id="password"
               type="password"
               placeholder="Enter your password"
               className="h-11"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
-          <Button asChild className="w-full h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-            <Link href="/dashboard">Login</Link>
+          <Button type="submit" className="w-full h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700" disabled={loading}>
+            {loading ? "Signing in..." : "Login"}
           </Button>
+          </form>
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{" "}
             <Link
-              href="/signup"
+              href="/register"
               className="font-semibold text-blue-600 hover:text-blue-700 hover:underline"
             >
               Sign up

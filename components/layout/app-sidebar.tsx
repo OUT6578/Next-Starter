@@ -28,8 +28,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "../ui/button"
+import axiosInstance from "@/lib/axios"
 
 
 // Menu items based on the image
@@ -45,7 +46,20 @@ const navItems = [
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
+  const router = useRouter()
   const { toggleSidebar, state } = useSidebar()
+
+  const handleLogout = async () => {
+    try {
+        await axiosInstance.post("/auth/logout");
+        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
+        router.push("/login");
+    } catch (error) {
+        console.error("Logout failed", error);
+    }
+  }
+
   return (
     <Sidebar collapsible="icon" {...props} >
       <SidebarHeader />
@@ -106,7 +120,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
          <SidebarMenu>
             <SidebarMenuItem>
-                <SidebarMenuButton tooltip="Exit">
+                <SidebarMenuButton tooltip="Exit" onClick={handleLogout}>
                     <LogOut />
                     <span>Exit</span>
                 </SidebarMenuButton>
