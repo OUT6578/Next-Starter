@@ -19,20 +19,20 @@ export function AppHeader() {
         
         {/* Logo and Company Name - Using text based on image since I don't have the logo asset */}
         <div className="hidden md:flex flex-col">
-            <h1 className="text-sm font-bold text-blue-900 leading-tight">Dedicated Freight Corridor Corporation of India Limited</h1>
-            <p className="text-[10px] text-gray-500">A Govt. of India (Ministry of Railways) Enterprise</p>
+            <h1 className="text-sm font-bold text-blue-900 leading-tight">Work Store</h1>
+            {/* <p className="text-[10px] text-gray-500">A Govt. of India (Ministry of Railways) Enterprise</p> */}
         </div>
       </div>
       
       {/* Center Title */}
       <div className="flex-1 flex justify-center">
-        <h2 className="text-xl font-bold text-blue-600">e-अतिथि / Visitor Mangement</h2>
+        {/* <h2 className="text-xl font-bold text-blue-600">e-अतिथि / Visitor Mangement</h2> */}
       </div>
 
       {/* Right Side - User Profile */}
       <div className="flex items-center gap-4">
         <div className="text-right hidden sm:block">
-            <p className="text-sm font-bold text-gray-700">RANJEET KUMAR</p>
+            {/* <p className="text-sm font-bold text-gray-700">RANJEET KUMAR</p> */}
         </div>
         <Button variant="ghost" size="icon" className="text-gray-500">
             <Power className="h-5 w-5" />

@@ -39,31 +39,8 @@ const navItems = [
     url: "/dashboard",
     icon: LayoutDashboard,
   },
-  {
-    title: "Todays View",
-    url: "#",
-    icon: Eye,
-  },
-  {
-    title: "Meeting Requests",
-    url: "#",
-    icon: FileText,
-  },
-  {
-    title: "Upcoming Meeting",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Visitor Directory",
-    url: "#",
-    icon: Users,
-  },
-  {
-    title: "Notification",
-    url: "#",
-    icon: Bell,
-  },
+
+
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
