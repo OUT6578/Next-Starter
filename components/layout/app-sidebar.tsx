@@ -28,9 +28,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Button } from "../ui/button"
-import axiosInstance from "@/lib/axios"
+import { useAuth } from "@/hooks/useAuth"
 
 
 // Menu items based on the image
@@ -40,25 +40,12 @@ const navItems = [
     url: "/dashboard",
     icon: LayoutDashboard,
   },
-
-
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
-  const router = useRouter()
   const { toggleSidebar, state } = useSidebar()
-
-  const handleLogout = async () => {
-    try {
-        await axiosInstance.post("/auth/logout");
-        localStorage.removeItem("user");
-        localStorage.removeItem("accessToken");
-        router.push("/login");
-    } catch (error) {
-        console.error("Logout failed", error);
-    }
-  }
+  const { logout, user } = useAuth();
 
   return (
     <Sidebar collapsible="icon" {...props} >
@@ -98,20 +85,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </SidebarMenuItem>
               )})}
               
-               {/* About Page link as requested */}
-               <SidebarMenuItem>
-                  <SidebarMenuButton 
-                    asChild 
-                    isActive={pathname === "/about"} 
-                    tooltip="About"
-                    className={pathname === "/about" ? "bg-blue-600 text-white hover:bg-blue-700 hover:text-white" : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"}
-                  >
-                    <Link href="/about">
-                      <Users /> 
-                      <span>About</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+               {/* About Page link as requested - Only for Admins */}
+               {user && user.role === "Admin" && (
+                 <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      asChild 
+                      isActive={pathname === "/about"} 
+                      tooltip="About"
+                      className={pathname === "/about" ? "bg-blue-600 text-white hover:bg-blue-700 hover:text-white" : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"}
+                    >
+                      <Link href="/about">
+                        <Users /> 
+                        <span>About</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+               )}
 
             </SidebarMenu>
           </SidebarGroupContent>
@@ -120,7 +109,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
          <SidebarMenu>
             <SidebarMenuItem>
-                <SidebarMenuButton tooltip="Exit" onClick={handleLogout}>
+                <SidebarMenuButton tooltip="Exit" onClick={logout}>
                     <LogOut />
                     <span>Exit</span>
                 </SidebarMenuButton>

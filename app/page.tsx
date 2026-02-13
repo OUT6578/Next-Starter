@@ -6,11 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axios";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Home() {
-    const router = useRouter();
+    const { login } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -26,12 +26,9 @@ export default function Home() {
   
         const data = res.data;
   
-        // Store access token
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("user", JSON.stringify(data.user));
-  
-        // Redirect to dashboard
-        router.push("/dashboard");
+        // Use the login function from useAuth hook
+        login(data.user, data.accessToken);
+        
       } catch (err: any) {
         setError(err.message || "Something went wrong");
       } finally {

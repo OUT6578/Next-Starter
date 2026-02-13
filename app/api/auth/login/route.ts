@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     // Generate tokens
     const accessToken = generateAccessToken({ id: user._id, role: user.role });
-    const refreshToken = generateRefreshToken({ id: user._id });
+    const refreshToken = generateRefreshToken({ id: user._id, role: user.role });
 
     // Save refresh token to database (optional but good for revocation)
     user.refreshToken = refreshToken;

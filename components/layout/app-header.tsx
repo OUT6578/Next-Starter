@@ -6,9 +6,11 @@ import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { useAuth } from "@/hooks/useAuth"
 
 export function AppHeader() {
     const { state, toggleSidebar } = useSidebar()
+    const { user, logout } = useAuth();
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
@@ -32,9 +34,11 @@ export function AppHeader() {
       {/* Right Side - User Profile */}
       <div className="flex items-center gap-4">
         <div className="text-right hidden sm:block">
-            {/* <p className="text-sm font-bold text-gray-700">RANJEET KUMAR</p> */}
+            {user && (
+                <p className="text-sm font-bold text-gray-700">{user.name.toUpperCase()}</p>
+            )}
         </div>
-        <Button variant="ghost" size="icon" className="text-gray-500">
+        <Button variant="ghost" size="icon" className="text-gray-500" onClick={logout}>
             <Power className="h-5 w-5" />
         </Button>
       </div>
