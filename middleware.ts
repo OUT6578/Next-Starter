@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
+import { getToken } from "next-auth/jwt";
 
 const REFRESH_TOKEN_SECRET = new TextEncoder().encode(
   process.env.REFRESH_TOKEN_SECRET || "your-refresh-secret-key"
@@ -35,6 +36,15 @@ export async function middleware(req: NextRequest) {
       userRole = payload.role;
     } catch (error) {
       isValidToken = false;
+    }
+  }
+
+  // If not valid yet, check for NextAuth token
+  if (!isValidToken) {
+    const nextAuthToken = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    if (nextAuthToken) {
+      isValidToken = true;
+      userRole = nextAuthToken.role;
     }
   }
 

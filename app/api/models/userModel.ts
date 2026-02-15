@@ -9,7 +9,9 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password?: string;
-  mobile: string;
+  image?: string;
+  googleId?: string;
+  mobile?: string;
   dob?: Date;
   address?: IAddress;
   role: "User" | "Admin";
@@ -32,11 +34,19 @@ const UserSchema = new Schema<IUser>(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: false, // Changed to false for OAuth
+    },
+    image: {
+      type: String,
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
     },
     mobile: {
       type: String,
-      required: [true, "Mobile number is required"],
+      required: false, // Changed to false for OAuth
     },
     dob: {
       type: Date,

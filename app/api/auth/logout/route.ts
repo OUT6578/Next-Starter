@@ -24,8 +24,20 @@ export async function POST(req: NextRequest) {
     }
 
     // Clear cookies
-    cookieStore.set("accessToken", "", { maxAge: 0, path: "/" });
-    cookieStore.set("refreshToken", "", { maxAge: 0, path: "/" });
+    cookieStore.set("accessToken", "", { 
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 0, 
+      path: "/" 
+    });
+    cookieStore.set("refreshToken", "", { 
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 0, 
+      path: "/" 
+    });
 
     return NextResponse.json({ message: "Logged out successfully" });
   } catch (error: any) {

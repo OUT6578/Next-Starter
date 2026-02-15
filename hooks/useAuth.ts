@@ -51,6 +51,7 @@ export function useAuth() {
       localStorage.removeItem("user");
       localStorage.removeItem("accessToken");
       setUser(null);
+      router.refresh();
       router.push("/login");
     }
   }, [router]);
