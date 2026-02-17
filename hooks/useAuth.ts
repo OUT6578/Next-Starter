@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 import axiosInstance from "@/lib/axios";
 
 interface User {
@@ -48,6 +49,7 @@ export function useAuth() {
     } catch (error) {
       console.error("Logout API call failed", error);
     } finally {
+      await signOut({ redirect: false });
       localStorage.removeItem("user");
       localStorage.removeItem("accessToken");
       setUser(null);

@@ -38,6 +38,18 @@ export async function POST(req: NextRequest) {
       maxAge: 0, 
       path: "/" 
     });
+    
+    // Clear NextAuth session cookies
+    cookieStore.set("next-auth.session-token", "", { 
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 0, 
+      path: "/" 
+    });
+    cookieStore.set("__Secure-next-auth.session-token", "", { 
+      secure: true,
+      maxAge: 0, 
+      path: "/" 
+    });
 
     return NextResponse.json({ message: "Logged out successfully" });
   } catch (error: any) {
