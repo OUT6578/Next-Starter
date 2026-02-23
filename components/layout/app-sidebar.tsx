@@ -6,6 +6,8 @@ import {
   Calendar,
   ChevronLeft,
   ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
   Eye,
   FileText,
   LayoutDashboard,
@@ -58,7 +60,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             className="h-7 w-7" 
             onClick={toggleSidebar}
         >
-            {state === "expanded" ? <ChevronLeft /> : <ChevronRight />}
+            {state === "expanded" ? <ChevronsLeft/> : <ChevronsRight />}
         </Button></div>
       </div>
      
