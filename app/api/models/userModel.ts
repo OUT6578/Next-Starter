@@ -14,7 +14,7 @@ export interface IUser extends Document {
   mobile?: string;
   dob?: Date;
   address?: IAddress;
-  role: "User" | "Admin";
+  role: "User" | "Admin" | "Manager";
   refreshToken?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -57,7 +57,7 @@ const UserSchema = new Schema<IUser>(
     },
     role: {
       type: String,
-      enum: ["User", "Admin"],
+      enum: ["User", "Admin", "Manager"],
       default: "User",
     },
     refreshToken: {

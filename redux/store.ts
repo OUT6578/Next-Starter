@@ -2,6 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import authReducer from './features/authSlice';
+import videoReducer from './features/videoSlice';
+import trackingReducer from './features/trackingSlice';
+import categoryReducer from './features/categorySlice';
 import { combineReducers } from '@reduxjs/toolkit';
 
 const createNoopStorage = () => {
@@ -22,12 +25,15 @@ const storage = typeof window !== "undefined" ? createWebStorage("local") : crea
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  videos: videoReducer,
+  tracking: trackingReducer,
+  categories: categoryReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'], // persist auth slice
+  whitelist: ['auth'], // only persist auth slice
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

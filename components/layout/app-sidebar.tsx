@@ -13,6 +13,11 @@ import {
   LayoutDashboard,
   LogOut,
   Users,
+  Video,
+  List,
+  ShieldAlert,
+  Settings,
+  Layers
 } from "lucide-react"
 
 import {
@@ -35,12 +40,53 @@ import { Button } from "../ui/button"
 import { useAuth } from "@/hooks/useAuth"
 
 
-// Menu items based on the image
-const navItems = [
+// Base menu items
+const baseNavItems = [
   {
     title: "Dashboard",
     url: "/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    title: "All Videos",
+    url: "/videos",
+    icon: Video,
+  },
+]
+
+const adminNavItems = [
+  {
+    title: "User Management",
+    url: "/admin/users",
+    icon: Users,
+  },
+  {
+    title: "Video Management",
+    url: "/admin/videos",
+    icon: List,
+  },
+  {
+    title: "Categories",
+    url: "/admin/categories",
+    icon: Layers,
+  },
+  {
+    title: "Roles",
+    url: "/admin/roles",
+    icon: ShieldAlert,
+  },
+]
+
+const managerNavItems = [
+  {
+    title: "Video Management",
+    url: "/admin/videos",
+    icon: List,
+  },
+  {
+    title: "Categories",
+    url: "/admin/categories",
+    icon: Layers,
   },
 ]
 
@@ -49,19 +95,33 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { toggleSidebar, state } = useSidebar()
   const { logout, user } = useAuth();
 
+  const navItems = [...baseNavItems];
+  
+  if (user?.role === "admin") {
+    navItems.push(...adminNavItems);
+  } else if (user?.role === "manager") {
+    navItems.push(...managerNavItems);
+  }
+
   return (
     <Sidebar collapsible="icon" {...props} >
-      <SidebarHeader />
-      <div className="flex justify-end">
-        <div ></div>
-        <div>    <Button 
+      <SidebarHeader className="p-4">
+        <div className="flex items-center gap-2 px-2 group-data-[collapsible=icon]:hidden">
+          <div className="bg-blue-600 p-1.5 rounded-lg">
+            <Video className="w-5 h-5 text-white" />
+          </div>
+          <span className="font-bold text-lg">VideoTracker</span>
+        </div>
+      </SidebarHeader>
+      <div className="flex justify-end pr-2">
+        <Button 
             variant="ghost" 
             size="icon" 
             className="h-7 w-7" 
             onClick={toggleSidebar}
         >
             {state === "expanded" ? <ChevronsLeft/> : <ChevronsRight />}
-        </Button></div>
+        </Button>
       </div>
      
       <SidebarSeparator />
@@ -70,7 +130,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => {
-                 const isActive = pathname === item.url
+                 const isActive = pathname === item.url || pathname.startsWith(item.url + "/")
                  return (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
@@ -86,24 +146,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )})}
-              
-               {/* About Page link as requested - Only for Admins */}
-               {user && user.role === "Admin" && (
-                 <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      asChild 
-                      isActive={pathname === "/about"} 
-                      tooltip="About"
-                      className={pathname === "/about" ? "bg-blue-600 text-white hover:bg-blue-700 hover:text-white" : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"}
-                    >
-                      <Link href="/about">
-                        <Users /> 
-                        <span>About</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-               )}
-
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { 
-  Users, 
+  Play, 
   Shield, 
   Zap, 
-  Calendar, 
+  History, 
   BarChart3, 
   Bell,
   ChevronRight,
@@ -27,7 +27,9 @@ import {
   Send,
   Heart,
   Sparkles,
-  Globe
+  Globe,
+  Video,
+  MousePointer2
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -73,11 +75,11 @@ export default function LandingPage() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur group-hover:blur-md transition-all" />
                 <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
-                  <Users className="w-6 h-6 text-white" />
+                  <Play className="w-6 h-6 text-white" />
                 </div>
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                CVR Guest Management
+                Video Tracker
               </span>
             </Link>
 
@@ -94,7 +96,7 @@ export default function LandingPage() {
                 asChild 
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                <Link href="/register">Sign Up</Link>
+                <Link href="/register">Get Started</Link>
               </Button>
             </div>
           </div>
@@ -110,52 +112,55 @@ export default function LandingPage() {
               <div className="inline-block">
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-sm font-semibold animate-bounce-slow">
                   <Award className="w-4 h-4" />
-                  National Guest Management Leader
+                  Next-Gen Video Analytics
                 </span>
               </div>
 
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                <span className="block animate-slide-in-left">Elevating</span>
+                <span className="block animate-slide-in-left">Track Every</span>
                 <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent animate-slide-in-left animation-delay-200">
-                  Excellence
+                  Second
                 </span>
-                <span className="block animate-slide-in-left animation-delay-400">in Guest Management</span>
+                <span className="block animate-slide-in-left animation-delay-400">of Your Progress</span>
               </h1>
 
               <p className="text-xl text-gray-600 leading-relaxed animate-fade-in animation-delay-600">
-                "We are committed to <span className="font-semibold text-blue-600">SERVING</span> and <span className="font-semibold text-purple-600">EDUCATING</span> our communities, <span className="font-semibold text-indigo-600">EMPOWERING</span> our members, and <span className="font-semibold text-blue-600">ADVANCING</span> and <span className="font-semibold text-purple-600">ADVOCATING</span> for the Guest Management profession"
+                Advanced video tracking system designed to <span className="font-semibold text-blue-600">MONITOR</span>, <span className="font-semibold text-purple-600">ANALYZE</span>, and <span className="font-semibold text-indigo-600">OPTIMIZE</span> your learning journey with real-time watch statistics.
               </p>
 
               <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-800">
                 <Button 
                   size="lg" 
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
+                  asChild
                 >
-                  Get Started
-                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <Link href="/videos">
+                    Start Watching
+                    <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline" 
                   className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 hover:scale-105"
                 >
-                  Learn More
+                  View Features
                 </Button>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 pt-8 animate-fade-in animation-delay-1000">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">10K+</div>
-                  <div className="text-sm text-gray-600">Active Users</div>
+                  <div className="text-3xl font-bold text-blue-600">200+</div>
+                  <div className="text-sm text-gray-600">Videos</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600">50K+</div>
-                  <div className="text-sm text-gray-600">Guests Managed</div>
+                  <div className="text-3xl font-bold text-purple-600">3 Roles</div>
+                  <div className="text-sm text-gray-600">RBAC Access</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-indigo-600">99.9%</div>
-                  <div className="text-sm text-gray-600">Uptime</div>
+                  <div className="text-3xl font-bold text-indigo-600">Real-time</div>
+                  <div className="text-sm text-gray-600">Tracking</div>
                 </div>
               </div>
             </div>
@@ -166,9 +171,9 @@ export default function LandingPage() {
               <Card className="relative overflow-hidden rounded-3xl shadow-2xl border-0 transform hover:scale-105 transition-all duration-500">
                 <div className="aspect-[4/3] bg-gradient-to-br from-blue-100 via-purple-100 to-indigo-100 flex items-center justify-center">
                   <div className="text-center p-8">
-                    <Users className="w-32 h-32 mx-auto text-blue-600 mb-4 animate-float" />
-                    <h3 className="text-2xl font-bold text-gray-800">Professional Guest Management</h3>
-                    <p className="text-gray-600 mt-2">Empowering organizations nationwide</p>
+                    <Video className="w-32 h-32 mx-auto text-blue-600 mb-4 animate-float" />
+                    <h3 className="text-2xl font-bold text-gray-800">Precision Analytics</h3>
+                    <p className="text-gray-600 mt-2">Every skip, pause, and play recorded</p>
                   </div>
                 </div>
               </Card>
@@ -184,25 +189,25 @@ export default function LandingPage() {
             <Card className="overflow-hidden rounded-3xl shadow-xl border-0 transform hover:scale-105 transition-all duration-500 animate-fade-in-left">
               <div className="aspect-[4/3] bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-8">
                 <div className="text-white text-center">
-                  <Calendar className="w-24 h-24 mx-auto mb-4 animate-bounce-slow" />
-                  <h3 className="text-3xl font-bold">Join Us in Delhi!</h3>
-                  <p className="text-lg mt-2">Annual Convention 2026</p>
+                  <History className="w-24 h-24 mx-auto mb-4 animate-bounce-slow" />
+                  <h3 className="text-3xl font-bold">Resume Watching!</h3>
+                  <p className="text-lg mt-2">Pick up right where you left off</p>
                 </div>
               </div>
             </Card>
 
             <div className="space-y-6 animate-fade-in-right">
               <h2 className="text-4xl font-bold text-gray-900">
-                Empowering Guest Management Professionals
+                Intelligent Progress Monitoring
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Advancing Guest Management Excellence and Strengthening Communities through innovative solutions, comprehensive training, and unwavering support for professionals nationwide.
+                Our system doesn't just track completion; it analyzes how you consume content. Understand your learning patterns through detailed heatmaps of skipped segments and rewatched parts.
               </p>
               <Button 
                 size="lg"
                 className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                Learn More
+                Explore Dashboard
                 <ChevronRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
@@ -216,53 +221,53 @@ export default function LandingPage() {
           <div className="text-center mb-16 animate-fade-in">
             <div className="inline-flex items-center gap-2 mb-4">
               <Sparkles className="w-6 h-6 text-purple-600 animate-spin-slow" />
-              <span className="text-purple-600 font-semibold">FEATURES</span>
+              <span className="text-purple-600 font-semibold">CAPABILITIES</span>
               <Sparkles className="w-6 h-6 text-purple-600 animate-spin-slow" />
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              Why Choose <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">CVR?</span>
+              Powerful <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Tracking</span>
             </h2>
             <p className="text-xl text-gray-600">
-              Everything you need for professional guest management
+              Everything you need to monitor video engagement
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: Users,
-                title: "Smart Registration",
-                description: "Streamline guest check-ins with our intelligent registration system and automated workflows",
+                icon: MousePointer2,
+                title: "Segment Tracking",
+                description: "Precisely track skipped segments and focus areas with millisecond accuracy",
                 color: "from-blue-500 to-blue-600"
               },
               {
                 icon: Shield,
-                title: "Enterprise Security",
-                description: "Bank-level encryption and security protocols to protect your sensitive guest data",
+                title: "Role Control",
+                description: "Granular access control for Admins, Managers, and Users to manage content",
                 color: "from-purple-500 to-purple-600"
               },
               {
                 icon: Zap,
-                title: "Lightning Fast",
-                description: "Process hundreds of guests in minutes with our optimized performance",
+                title: "Resume Playback",
+                description: "Seamlessly continue watching from your last position on any device",
                 color: "from-indigo-500 to-indigo-600"
               },
               {
                 icon: BarChart3,
-                title: "Real-time Analytics",
-                description: "Comprehensive dashboards and insights to track visitor patterns and trends",
+                title: "Advanced Stats",
+                description: "Comprehensive charts showing watch time, completion rates, and daily trends",
                 color: "from-blue-500 to-indigo-600"
               },
               {
                 icon: Bell,
-                title: "Instant Notifications",
-                description: "Stay informed with real-time alerts for guest arrivals and important events",
+                title: "Engagement Alerts",
+                description: "Notifications for milestone completions and new video uploads",
                 color: "from-purple-500 to-pink-600"
               },
               {
-                icon: Calendar,
-                title: "Event Management",
-                description: "Plan and manage events seamlessly with integrated scheduling tools",
+                icon: History,
+                title: "Session History",
+                description: "Detailed logs of all your viewing sessions including device information",
                 color: "from-indigo-500 to-purple-600"
               }
             ].map((feature, index) => (
@@ -286,136 +291,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Membership Section */}
-      <section id="membership" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }} />
-        </div>
-        
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">Attention Students!</h2>
-            <p className="text-xl text-blue-100">Level up your Guest Management journey with CVR</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <Card className="bg-white/10 backdrop-blur-lg border-white/20 p-8 animate-fade-in-left hover:bg-white/20 transition-all duration-300">
-              <div className="text-white space-y-4">
-                <p className="text-lg leading-relaxed">
-                  Join a national movement that celebrates you — the future of Guest Management! CVR empowers students with leadership opportunities, mentorship, and scholarship rewards up to <span className="text-2xl font-bold text-yellow-300">₹4,000</span>
-                </p>
-                <ul className="space-y-3">
-                  {[
-                    "Leadership development programs",
-                    "Networking with industry professionals",
-                    "Scholarship opportunities",
-                    "Career advancement resources"
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3 animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                      <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Card>
-
-            <div className="space-y-6 animate-fade-in-right">
-              <Card className="bg-white p-8 text-gray-900 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105">
-                <div className="text-center mb-6">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full mb-4 animate-bounce-slow">
-                    <Star className="w-10 h-10 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold">Join Today!</h3>
-                  <p className="text-gray-600 mt-2">Start your journey to excellence</p>
-                </div>
-                <Button 
-                  size="lg" 
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                  asChild
-                >
-                  <Link href="/register">Enroll Now</Link>
-                </Button>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              Member of the Month
-            </h2>
-          </div>
-
-          <Card className="overflow-hidden shadow-2xl border-0 animate-scale-in hover:shadow-3xl transition-all duration-500">
-            <div className="grid lg:grid-cols-2">
-              <div className="bg-gradient-to-br from-purple-100 via-blue-100 to-indigo-100 p-12 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-48 h-48 mx-auto bg-gradient-to-br from-blue-400 to-purple-400 rounded-full flex items-center justify-center mb-6 animate-float shadow-2xl">
-                    <Users className="w-24 h-24 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900">Featured Member</h3>
-                  <p className="text-gray-600 mt-2">Excellence in Guest Management</p>
-                </div>
-              </div>
-              <div className="p-12 bg-gradient-to-br from-blue-600 to-purple-600 text-white flex flex-col justify-center">
-                <Award className="w-16 h-16 mb-6 text-yellow-300 animate-bounce-slow" />
-                <h3 className="text-3xl font-bold mb-4">Recognition of Excellence</h3>
-                <p className="text-lg text-blue-100 leading-relaxed mb-6">
-                  Celebrating outstanding professionals who exemplify dedication, innovation, and service excellence in the guest management industry.
-                </p>
-                <div className="flex items-center gap-4">
-                  <TrendingUp className="w-8 h-8 text-green-300" />
-                  <span className="text-sm text-blue-100">Making a difference in communities nationwide</span>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <Card className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 border-0 shadow-2xl overflow-hidden animate-scale-in">
-            <div className="relative p-12 text-center text-white">
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-                }} />
-              </div>
-              <div className="relative z-10 space-y-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4 animate-bounce-slow">
-                  <Sparkles className="w-8 h-8 text-white" />
-                </div>
-                <h2 className="text-4xl sm:text-5xl font-bold">
-                  Ready to Get Started?
-                </h2>
-                <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-                  Join thousands of professionals already using CVR to manage their guests efficiently
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
-                  <Button 
-                    size="lg" 
-                    variant="secondary"
-                    asChild
-                    className="text-blue-600 font-bold hover:bg-blue-50 transform hover:scale-105 transition-all shadow-xl"
-                  >
-                     <Link href="/register">Create Account</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white overflow-hidden">
         {/* Animated Background */}
@@ -434,7 +309,7 @@ export default function LandingPage() {
                   <Mail className="w-6 h-6 text-blue-400 animate-bounce-slow" />
                   <h3 className="text-2xl font-bold">Stay Updated</h3>
                 </div>
-                <p className="text-blue-200">Subscribe to our newsletter for the latest updates and exclusive offers</p>
+                <p className="text-blue-200">Subscribe for the latest platform updates and analytics features</p>
               </div>
               <form onSubmit={handleNewsletterSubmit} className="flex gap-3">
                 <Input 
@@ -466,17 +341,17 @@ export default function LandingPage() {
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg blur group-hover:blur-md transition-all" />
                   <div className="relative bg-gradient-to-r from-blue-500 to-purple-500 p-2 rounded-lg">
-                    <Users className="w-8 h-8 text-white" />
+                    <Play className="w-8 h-8 text-white" />
                   </div>
                 </div>
-                <span className="text-xl font-bold">CVR</span>
+                <span className="text-xl font-bold">Video Tracker</span>
               </Link>
               <p className="text-blue-200 leading-relaxed">
-                Empowering organizations with professional guest management solutions nationwide.
+                Empowering learners and organizations with professional video tracking and engagement analytics.
               </p>
               <div className="flex items-center gap-2">
                 <Heart className="w-5 h-5 text-red-400 animate-pulse" />
-                <span className="text-sm text-blue-200">Made with love in India</span>
+                <span className="text-sm text-blue-200">Built for precision</span>
               </div>
             </div>
 
@@ -484,13 +359,13 @@ export default function LandingPage() {
             <div>
               <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-purple-400" />
-                Quick Links
+                Explore
               </h4>
               <ul className="space-y-3">
-                {["About Us", "Features", "Membership", "Events", "Resources", "Blog"].map((link, index) => (
+                {["Videos", "Analytics", "Dashboard", "Admin Console"].map((link, index) => (
                   <li key={index}>
                     <Link 
-                      href={`#${link.toLowerCase().replace(" ", "-")}`}
+                      href={`/${link.toLowerCase().replace(" ", "-")}`}
                       className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 group"
                     >
                       <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -501,21 +376,21 @@ export default function LandingPage() {
               </ul>
             </div>
 
-            {/* Services */}
+            {/* Support */}
             <div>
               <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
                 <Globe className="w-5 h-5 text-blue-400" />
-                Services
+                Platform
               </h4>
               <ul className="space-y-3">
-                {["Guest Registration", "Event Management", "Analytics & Reports", "Security Solutions", "Mobile App", "API Access"].map((service, index) => (
+                {["API Documentation", "Security", "Privacy Policy", "Terms of Service"].map((item, index) => (
                   <li key={index}>
                     <Link 
                       href="#"
                       className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 group"
                     >
                       <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      {service}
+                      {item}
                     </Link>
                   </li>
                 ))}
@@ -526,26 +401,20 @@ export default function LandingPage() {
             <div>
               <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
                 <Phone className="w-5 h-5 text-green-400" />
-                Contact Us
+                Support
               </h4>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3 group">
                   <MapPin className="w-5 h-5 text-blue-400 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" />
                   <span className="text-blue-200">
-                    CVR College of Engineering<br />
-                    Hyderabad, India
+                    Video Tracker HQ<br />
+                    Global Platform
                   </span>
                 </li>
                 <li className="flex items-center gap-3 group">
-                  <Phone className="w-5 h-5 text-green-400 flex-shrink-0 group-hover:rotate-12 transition-transform" />
-                  <a href="tel:+911234567890" className="text-blue-200 hover:text-white transition-colors">
-                    +91 123 456 7890
-                  </a>
-                </li>
-                <li className="flex items-center gap-3 group">
                   <Mail className="w-5 h-5 text-purple-400 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <a href="mailto:info@cvr.ac.in" className="text-blue-200 hover:text-white transition-colors">
-                    info@cvr.ac.in
+                  <a href="mailto:support@videotracker.com" className="text-blue-200 hover:text-white transition-colors">
+                    support@videotracker.com
                   </a>
                 </li>
               </ul>
@@ -579,17 +448,8 @@ export default function LandingPage() {
               {/* Copyright */}
               <div className="text-center md:text-right">
                 <p className="text-blue-200 text-sm">
-                  © 2026 CVR Guest Management. All rights reserved.
+                  © 2026 Video Tracking System. All rights reserved.
                 </p>
-                <div className="flex items-center justify-center md:justify-end gap-4 mt-2">
-                  <Link href="#" className="text-blue-300 hover:text-white text-sm transition-colors">
-                    Privacy Policy
-                  </Link>
-                  <span className="text-blue-400">•</span>
-                  <Link href="#" className="text-blue-300 hover:text-white text-sm transition-colors">
-                    Terms of Service
-                  </Link>
-                </div>
               </div>
             </div>
           </div>

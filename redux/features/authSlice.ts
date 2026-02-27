@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axiosInstance from '@/lib/axios';
+import authService from '@/services/authService';
 
 // Define user interface
 interface User {
@@ -30,8 +30,7 @@ export const registerUser = createAsyncThunk(
   'auth/register',
   async (userData: any, thunkAPI) => {
     try {
-      const response = await axiosInstance.post('/auth/register', userData);
-      return response.data;
+      return await authService.register(userData);
     } catch (error: any) {
       const message = error.response?.data?.message || error.message || "Registration failed";
       return thunkAPI.rejectWithValue(message);
@@ -44,13 +43,13 @@ export const loginUser = createAsyncThunk(
   'auth/login',
   async (userData: any, thunkAPI) => {
     try {
-      const response = await axiosInstance.post('/auth/login', userData);
-      if (response.data.token) {
+      const data = await authService.login(userData);
+      if (data.token) {
         if (typeof window !== 'undefined') {
-            localStorage.setItem('accessToken', response.data.token);
+            localStorage.setItem('accessToken', data.token);
         }
       }
-      return response.data;
+      return data;
     } catch (error: any) {
       const message = error.response?.data?.message || error.message || "Login failed";
       return thunkAPI.rejectWithValue(message);
@@ -63,7 +62,7 @@ export const logoutUser = createAsyncThunk(
     'auth/logout',
     async (_, thunkAPI) => {
         try {
-             await axiosInstance.post('/auth/logout');
+             await authService.logout();
         } catch (error) {
             console.error(error);
         }
